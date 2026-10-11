@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fact or Fiction | How to Spot Misinformation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Global header: title / home button and overall progress bar -->
+    <header class="global-header">
+        <div class="header-content">
+            <!-- Brand / home container -->
+            <div class="header-brand">
+                <span id="header-title" class="header-title">Fact or Fiction: How to Spot Misinformation</span>
+                <button id="nav-home-btn" class="btn-secondary hidden" type="button">🏠 Home</button>
+            </div>
+
+            <div class="progress-container">
+                <span>Overall Progress:</span>
+                <div class="progress-bar-bg">
+                    <div id="global-progress" class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <span id="progress-text">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main container with white space and margins -->
+    <main class="app-container">
+
+        <!-- 1. HOME VIEW -->
+        <section id="view-home" class="view">
+            <div class="hero-banner">
+                <h1>How to Spot Misinformation</h1>
+                <p class="subtitle">Have you ever seen a post online and thought it didn't sound real? Are you sure it was true?</p>
+
+                <!-- Warm-up: a one-click guess. script.js fills in the answer. -->
+                <div class="warmup" id="warmup">
+                    <p class="warmup-label">Try it: real or fake?</p>
+                    <p class="warmup-headline">SHOCKING: Doctors HATE this one weird trick that cures every illness overnight!</p>
+                    <div class="warmup-buttons">
+                        <button type="button" class="btn-secondary" data-guess="real">Real</button>
+                        <button type="button" class="btn-secondary" data-guess="fake">Fake</button>
+                    </div>
+                    <p class="warmup-answer hidden" id="warmup-answer" role="status"></p>
+                </div>
+
+                <p class="course-line">10 short lessons · a quiz after each · score 80% to unlock the next</p>
+            </div>
+
+            <!-- Quick action banner -->
+            <div class="current-module-card">
+                <div class="current-module-info">
+                    <span class="badge badge-active" id="current-status-badge">In Progress</span>
+                    <h2 id="current-module-title">Module 1: What Is Misinformation?</h2>
+                </div>
+                <button id="start-btn" class="btn-primary btn-large" type="button">Continue →</button>
+            </div>
+
+            <!-- 10 module selection grid -->
+            <div class="modules-section">
+                <p class="progress-line" id="progress-line"></p>
+                <div class="modules-grid" id="modules-grid">
+                    <!-- Dynamically populated by script.js -->
+                </div>
+            </div>
+
+            <div class="reset-area">
+                <button id="reset-btn" class="btn-secondary" type="button">↺ Reset All Progress</button>
+            </div>
+        </section>
+
+        <!-- 2. LEARNING VIEW -->
+        <section id="view-learning" class="view hidden">
+            <div class="view-header">
+                <span class="module-pill" id="learning-module-pill">Module 1 of 10</span>
+                <h2 id="learning-title">Step 1: Core Concepts</h2>
+            </div>
+
+            <div id="learning-content" class="learning-content">
+                <!-- Lesson content injected by script.js -->
+            </div>
+
+            <div class="view-footer">
+                <button id="back-to-home-btn" class="btn-secondary" type="button">← Back to Dashboard</button>
+                <button id="to-quiz-btn" class="btn-primary" type="button">Take the Module Quiz →</button>
+            </div>
+        </section>
+
+        <!-- 3. QUIZ VIEW -->
+        <section id="view-quiz" class="view hidden">
+            <div class="view-header">
+                <span class="module-pill" id="quiz-module-pill">Quiz — Module 1</span>
+                <h2 id="quiz-title">Knowledge Check</h2>
+            </div>
+
+            <!-- All questions for the module are rendered here at once by script.js -->
+            <div id="quiz-questions" class="quiz-list"></div>
+
+            <div class="view-footer quiz-footer">
+                <!-- aria-live so screen readers hear "Answered 3 of 5" and the final tally -->
+                <span id="quiz-status" class="quiz-status" aria-live="polite"></span>
+                <div class="quiz-actions">
+                    <button id="quiz-submit-btn" class="btn-primary" type="button" disabled>Submit Answers</button>
+                    <button id="quiz-results-btn" class="btn-primary hidden" type="button">See Final Results →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. RESULTS VIEW -->
+        <section id="view-results" class="view hidden">
+            <h2>Evaluation Results</h2>
+            <div class="results-card">
+                <div id="result-status-icon" class="result-icon">🎉</div>
+                <h3 id="result-headline">Module Completed!</h3>
+                <p id="result-message">You passed this segment with flying colors!</p>
+                <p class="score-display">Score: <span id="session-score">100</span>%</p>
+            </div>
+
+            <div class="results-actions">
+                <button id="repeat-learning-btn" class="btn-secondary" type="button">🔄 Repeat Lesson</button>
+                <button id="next-module-btn" class="btn-primary" type="button">Advance to Next Module →</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 5. CERTIFICATE VIEW -->
+    <section id="view-certificate" class="view hidden">
+        <div class="certificate-container" id="certificate-print-area">
+            <div class="certificate-header">
+                <span class="cert-badge">🏆 OFFICIAL CERTIFICATE</span>
+                <h1>Certificate of Achievement</h1>
+                <p class="cert-subtitle">This is awarded to</p>
+                <h2 class="recipient-name" id="cert-recipient">Media Literacy Scholar</h2>
+                <p class="cert-body">
+                    For successfully mastering all 10 modules of the <strong>Fact or Fiction: How to Spot Misinformation</strong> course with a passing grade of 80% or higher on each module.
+                </p>
+            </div>
+
+            <div class="cert-summary-section">
+                <h3>Module Performance Summary</h3>
+                <div id="cert-summary-list" class="cert-summary-grid">
+                    <!-- Injected by script.js -->
+                </div>
+                <div class="cert-overall-score">
+                    Overall Average Score: <strong id="cert-overall-avg">0%</strong>
+                </div>
+            </div>
+
+            <div class="cert-footer">
+                <div class="cert-stamp">VERIFIED<br>SUCCESS</div>
+                <p>Fact or Fiction Media Literacy Academy</p>
+            </div>
+        </div>
+
+        <div class="cert-name-row">
+            <label for="cert-name-input">Name on certificate:</label>
+            <input id="cert-name-input" class="cert-name-input" type="text" maxlength="40" placeholder="Type your name">
+        </div>
+
+        <div class="results-actions">
+            <button id="print-cert-btn" class="btn-primary" type="button">🖨️ Print / Save Certificate</button>
+            <button id="cert-back-home-btn" class="btn-secondary" type="button">← Return to Dashboard</button>
+        </div>
+    </section>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

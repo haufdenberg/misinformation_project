@@ -1,0 +1,1232 @@
+/* ==========================================================================
+   Fact or Fiction: How to Spot Misinformation
+   Stylesheet. Sections: variables, layout, header, home, buttons, learning,
+   quiz (incl. interactive "red flag" questions), results, certificate, print.
+   ========================================================================== */
+
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary: #64748b;
+    --secondary-hover: #475569;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --border-strong: #64748b;   /* borders that must be visible: buttons, options, pictures (4.8:1 on white) */
+    --header: #1E293B;
+    --success: #16a34a;
+    --success-bg: #f0fdf4;
+    --error: #dc2626;
+    --error-bg: #fef2f2;
+    --warning: #d97706;
+    --warning-bg: #fffbeb;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Visible keyboard focus for every interactive element (accessibility) */
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 2px;
+}
+
+/* ---------- Global header ---------- */
+.global-header {
+    background: var(--header);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-content {
+    width: 92%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.85rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+#nav-home-btn {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    background: var(--primary);
+    color: #ffffff;
+    border: 1px solid var(--primary);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+#nav-home-btn:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.progress-bar-bg {
+    width: 160px;
+    height: 10px;
+    background: #475569;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: #4ade80;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Replaces the progress bar once the whole course is passed */
+.cert-header-link {
+    background: #fbbf24;
+    color: #1e293b;
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+}
+
+.cert-header-link:hover {
+    background: #f59e0b;
+}
+
+/* ---------- Main container ---------- */
+.app-container {
+    width: 92%;
+    max-width: 1400px;
+    margin: 2.5rem auto;
+    padding: 2.5rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    flex: 1;
+}
+
+.view {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* SPA view toggle: script.js adds/removes this class */
+.hidden {
+    display: none !important;
+}
+
+/* ---------- Home view ---------- */
+.hero-banner {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+}
+
+.hero-banner h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.2rem;
+    color: var(--text);
+}
+
+.hero-banner .subtitle {
+    font-size: 1.15rem;
+    color: var(--primary);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.current-module-card {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius);
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.current-module-info h2 {
+    margin: 0.4rem 0 0.25rem 0;
+    font-size: 1.35rem;
+}
+
+.current-module-info p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.modules-section {
+    margin-top: 1rem;
+}
+
+.progress-line {
+    margin: 0 0 1rem 0;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.course-line {
+    margin: 1.25rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Warm-up: real or fake? */
+.warmup {
+    margin-top: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    max-width: 560px;
+}
+
+.warmup-label {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.warmup-headline {
+    margin: 0.5rem 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.warmup-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.warmup-answer {
+    margin: 1rem 0 0;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.warmup-answer.correct { background: #dcfce7; color: #14532d; border-color: #166534; }
+.warmup-answer.incorrect { background: #fee2e2; color: #7f1d1d; border-color: #b91c1c; }
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.module-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.module-card:hover:not(.locked) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.module-card.passed {
+    border-left: 5px solid #166534;
+}
+
+.module-card.current {
+    border: 2px solid var(--primary);
+}
+
+.module-card.locked {
+    opacity: 0.65;
+    background: #f1f5f9;
+}
+
+.module-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.module-number {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.module-card-title {
+    margin: 0.35rem 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.reset-area {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+}
+
+/* ---------- Badges ---------- */
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+
+.badge-completed { background: #dcfce7; color: #166534; }
+.badge-active { background: #dbeafe; color: #1d4ed8; }
+.badge-locked { background: #e2e8f0; color: #475569; }
+
+/* ---------- Buttons ---------- */
+button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+
+.btn-secondary {
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: var(--border);
+}
+
+.btn-large {
+    padding: 0.85rem 1.5rem;
+    font-size: 1.05rem;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ---------- Learning view ---------- */
+.view-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.module-pill {
+    background: #e0e7ff;
+    color: #4338ca;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.learning-content {
+    font-size: 1.05rem;
+    color: #334155;
+}
+
+.learning-content p {
+    margin-bottom: 1.25rem;
+}
+
+.learning-content ul,
+.learning-content ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+}
+
+.learning-content li {
+    margin-bottom: 0.5rem;
+}
+
+.callout-box {
+    background: #f8fafc;
+    border-left: 4px solid var(--primary);
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+.view-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* All questions of a module are stacked on one page */
+.quiz-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Quiz footer stays visible while scrolling: progress text on the left, buttons on the right */
+.quiz-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    background: var(--card-bg);
+    padding-bottom: 1rem;
+    margin-top: 0;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.quiz-status {
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.quiz-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* ---------- Quiz ---------- */
+.quiz-container {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.quiz-progress-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+/* Optional mock post / scenario shown above a question */
+.quiz-scenario {
+    background: #ffffff;
+    border: 1px dashed #94a3b8;
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1rem;
+    color: #334155;
+}
+
+.quiz-scenario p {
+    margin: 0;
+}
+
+.mock-label {
+    font-weight: 600;
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 1.25rem 0;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.option-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    text-align: left;
+    justify-content: flex-start;
+    color: var(--text);
+    font-weight: 500;
+    width: 100%;
+}
+
+.option-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: #eff6ff;
+}
+
+/* Option the user has chosen but not yet submitted */
+.option-btn.selected {
+    border-color: var(--primary);
+    background: #dbeafe;
+    box-shadow: 0 0 0 1px var(--primary);
+}
+
+/* Correct answer (also used to reveal the right answer after a miss) */
+.option-btn.selected-correct {
+    background: var(--success-bg) !important;
+    border-color: var(--success);
+    box-shadow: none;
+    opacity: 1;
+}
+
+/* The wrong answer the user picked */
+.option-btn.selected-incorrect {
+    background: var(--error-bg) !important;
+    border-color: var(--error);
+    box-shadow: none;
+    opacity: 1;
+}
+
+/* Feedback box shown after each answer */
+.quiz-feedback {
+    margin-top: 1.25rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--border);
+    font-weight: 500;
+}
+
+.quiz-feedback.correct {
+    background: var(--success-bg);
+    border-left-color: var(--success);
+    color: #166534;
+}
+
+.quiz-feedback.incorrect {
+    background: var(--error-bg);
+    border-left-color: var(--error);
+    color: #991b1b;
+}
+
+/* "Tap every red flag" questions: toggle buttons styled as lines of a mock post */
+.quiz-options.flag-list {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 0.9rem;
+}
+
+.flag-item {
+    background: #f8fafc;
+    border: 2px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    justify-content: flex-start;
+    color: var(--text);
+    font-weight: 500;
+    width: 100%;
+}
+
+.flag-item:hover:not(:disabled) {
+    border-color: var(--warning);
+}
+
+.flag-item.picked {
+    background: var(--warning-bg);
+    border-color: var(--warning);
+}
+
+/* After grading: correctly flagged / wrongly flagged / red flag the user missed */
+.flag-item.flag-correct {
+    background: var(--success-bg);
+    border-color: var(--success);
+    opacity: 1;
+}
+
+.flag-item.flag-wrong {
+    background: var(--error-bg);
+    border-color: var(--error);
+    opacity: 1;
+}
+
+.flag-item.flag-missed {
+    background: #ffffff;
+    border: 2px dashed var(--error);
+    opacity: 1;
+}
+
+/* ---------- Results view ---------- */
+.results-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.result-icon {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.score-display {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+.results-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   CERTIFICATE VIEW (screen)
+   ========================================================================== */
+#view-certificate {
+    max-width: 1000px;
+    margin: 3rem auto;
+    width: 90%;
+    align-items: center;
+}
+
+.certificate-container {
+    background: #ffffff;
+    color: #1e293b;
+    padding: 3.5rem;
+    border: 12px double #1e293b;
+    border-radius: 4px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.cert-badge {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--secondary);
+    font-size: 0.85rem;
+}
+
+.certificate-header h1 {
+    font-size: 2.75rem;
+    font-family: Georgia, serif;
+    color: #0f172a;
+    margin: 0.5rem 0 1.5rem 0;
+}
+
+.cert-subtitle {
+    font-style: italic;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.recipient-name {
+    font-size: 2.5rem;
+    font-family: Georgia, serif;
+    color: var(--primary);
+    margin: 0.5rem 0 1.5rem 0;
+    border-bottom: 2px solid #e2e8f0;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.cert-body {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #334155;
+}
+
+.cert-summary-section h3 {
+    font-style: normal;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.cert-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.cert-summary-grid > div {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.25rem;
+}
+
+.cert-overall-score {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.cert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 1.5rem;
+    border-top: 1px dashed #cbd5e1;
+    padding-top: 1.5rem;
+    text-align: left;
+}
+
+.cert-stamp {
+    border: 4px dashed var(--success);
+    color: var(--success);
+    padding: 0.5rem 1rem;
+    font-weight: 800;
+    font-size: 1rem;
+    transform: rotate(-7deg);
+    text-align: center;
+}
+
+.cert-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.cert-name-input {
+    font-size: 1rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid #94a3b8;
+    border-radius: 8px;
+    min-width: 240px;
+    font-family: inherit;
+}
+
+/* ==========================================================================
+   MARKS ON GRADED ANSWERS: a symbol and word, so meaning never depends on color alone
+   ========================================================================== */
+.option-btn.selected-correct::before,
+.flag-item.flag-correct::before {
+    content: "\2713";
+    font-weight: 800;
+    color: #166534;
+    margin-right: 0.5rem;
+}
+
+.option-btn.selected-incorrect::before,
+.flag-item.flag-wrong::before {
+    content: "\2717";
+    font-weight: 800;
+    color: #b91c1c;
+    margin-right: 0.5rem;
+}
+
+.flag-item.flag-missed::before {
+    content: "Missed red flag:";
+    font-weight: 700;
+    color: #b91c1c;
+    margin-right: 0.5rem;
+}
+
+/* ==========================================================================
+   LESSON EXTRAS: hover popups, pictures with credits, source lists
+   ========================================================================== */
+/* Hover popup. In a lesson write:  <span class="term" tabindex="0" data-tip="definition">word</span>
+   It shows on mouse hover, keyboard focus (Tab), or tap. No JavaScript needed. */
+.term {
+    position: relative;
+    border-bottom: 2px dotted var(--primary);
+    cursor: help;
+}
+
+.term::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: min(260px, 70vw);
+    background: #0f172a;
+    color: #ffffff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.4;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 30;
+}
+
+.term:hover::after,
+.term:focus::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.term:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* Links inside lessons */
+.learning-content a {
+    color: #1d4ed8;
+}
+
+/* A picture with a caption and credit line */
+.lesson-figure {
+    margin: 1.5rem 0;
+    max-width: 640px;
+}
+
+.lesson-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+}
+
+.lesson-figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: #334155;
+}
+
+.credit {
+    display: block;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #475569;
+}
+
+/* "Sources" list at the bottom of a lesson */
+.sources {
+    margin: 0;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.sources li {
+    margin-bottom: 0.3rem;
+}
+
+/* ==========================================================================
+   QUIZ EXTRAS: hotspot questions and picture options
+   ========================================================================== */
+/* Wrapper that lets the clickable areas sit on top of the picture, positioned in % of its size */
+.hotspot-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+}
+
+.hotspot-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+}
+
+.quiz-credit {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #475569;
+}
+
+/* A clickable region on a picture: invisible until hovered, focused, or selected */
+.hotspot {
+    position: absolute;
+    padding: 0;
+    background: transparent;
+    border: 2px dashed transparent;
+    border-radius: 4px;
+    line-height: 1.2;
+}
+
+.hotspot:hover:not(:disabled),
+.hotspot:focus-visible {
+    border-color: var(--primary);
+    background: rgb(37 99 235 / 0.12);
+}
+
+.hotspot.selected {
+    border: 3px solid var(--primary);
+    background: rgb(37 99 235 / 0.22);
+}
+
+/* After grading: the user's pick (right or wrong) and the correct regions they did not pick */
+.hotspot.hotspot-correct,
+.hotspot.hotspot-wrong,
+.hotspot.hotspot-reveal {
+    opacity: 1;
+}
+
+.hotspot.hotspot-correct {
+    border: 3px solid var(--success);
+    background: rgb(22 163 74 / 0.25);
+}
+
+.hotspot.hotspot-wrong {
+    border: 3px solid var(--error);
+    background: rgb(220 38 38 / 0.2);
+}
+
+.hotspot.hotspot-reveal {
+    border: 3px dashed var(--success);
+    background: rgb(22 163 74 / 0.1);
+}
+
+/* Small label sitting just ABOVE each graded region, so it never covers the text being reviewed */
+.hotspot.hotspot-correct::after,
+.hotspot.hotspot-reveal::after,
+.hotspot.hotspot-wrong::after {
+    position: absolute;
+    bottom: 100%;
+    left: -3px;
+    margin-bottom: 2px;
+    padding: 0 0.35rem;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0 0 0 1px currentColor;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.hotspot.hotspot-correct::after,
+.hotspot.hotspot-reveal::after {
+    content: "\2713 Red flag";
+    color: #166534;
+}
+
+.hotspot.hotspot-wrong::after {
+    content: "\2717 Not a red flag";
+    color: #b91c1c;
+}
+
+/* To SEE the clickable areas while you are placing them, remove the slashes-and-stars around this rule:
+.hotspot {
+    border: 2px dashed #ef4444;
+    background: rgb(239 68 68 / 0.15);
+}
+*/
+
+/* Picture options (imagechoice questions): a grid of large buttons */
+.quiz-options.image-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.option-btn.image-option {
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.6rem;
+}
+
+.image-option img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.image-option-label {
+    font-weight: 700;
+    text-align: center;
+}
+
+/* On picture options the ✓ / ✗ mark sits in the corner instead of above the picture */
+.option-btn.image-option.selected-correct::before,
+.option-btn.image-option.selected-incorrect::before {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    margin: 0;
+    padding: 0.1rem 0.6rem;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 2px solid currentColor;
+}
+
+/* ==========================================================================
+   RESPONSIVE (phones)
+   ========================================================================== */
+@media (max-width: 900px) {
+    .cert-summary-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    /* On phones the popup becomes a bar across the bottom of the screen, so it can never run off the side */
+    .term::after {
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        transform: none;
+        width: auto;
+        max-width: none;
+    }
+
+    .learning-content {
+        overflow-wrap: anywhere;
+    }
+
+    .app-container {
+        width: calc(100% - 2rem);
+        margin: 1rem auto;
+        padding: 1.25rem;
+    }
+
+    .header-content {
+        width: calc(100% - 2rem);
+        padding: 0.75rem 0;
+    }
+
+    .header-title {
+        font-size: 1.05rem;
+    }
+
+    .progress-bar-bg {
+        width: 100px;
+    }
+
+    .hero-banner h1 {
+        font-size: 1.7rem;
+    }
+
+    .certificate-container {
+        padding: 1.5rem;
+        border-width: 8px;
+    }
+
+    .certificate-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .recipient-name {
+        font-size: 1.7rem;
+    }
+
+    .cert-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==========================================================================
+   PRINT: only the certificate, on one landscape page
+   ========================================================================== */
+@media print {
+    @page {
+        size: landscape;
+        margin: 0.8cm;
+    }
+
+    /* Let the page be as tall as its content (the screen layout uses a full-height flex body) */
+    html,
+    body {
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    body {
+        display: block !important;
+        min-height: 0 !important;
+    }
+
+    /* Hide everything except the certificate itself */
+    .global-header,
+    .app-container,
+    #view-certificate .cert-name-row,
+    #view-certificate .results-actions {
+        display: none !important;
+    }
+
+    #view-certificate {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* If the certificate view isn't the visible one, print nothing */
+    #view-certificate.hidden {
+        display: none !important;
+    }
+
+    /* Compact sizing so the whole certificate fits on ONE landscape page */
+    .certificate-container {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        gap: 0.9rem !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 17.5cm !important;
+        padding: 1.5rem 2.25rem !important;
+        margin: 0 auto !important;
+        border: 8px double #1e293b !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .cert-badge {
+        font-size: 0.75rem !important;
+    }
+
+    .certificate-header h1 {
+        font-size: 2.5rem !important;
+        margin: 0.25rem 0 0.75rem 0 !important;
+    }
+
+    .recipient-name {
+        font-size: 2.2rem !important;
+        margin: 0.25rem 0 0.75rem 0 !important;
+        padding-bottom: 0.25rem !important;
+    }
+
+    .cert-body {
+        font-size: 1.05rem !important;
+        margin: 0 auto !important;
+    }
+
+    .cert-summary-section h3 {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .cert-summary-grid {
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .cert-summary-grid > div {
+        background: #f8fafc !important;
+        padding: 0.45rem 0.5rem !important;
+        font-size: 0.78rem !important;
+        line-height: 1.3 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .cert-overall-score {
+        font-size: 0.95rem !important;
+        margin-top: 0.3rem !important;
+    }
+
+    .cert-footer {
+        margin-top: 0.4rem !important;
+        padding-top: 0.5rem !important;
+    }
+
+    .cert-stamp {
+        font-size: 0.8rem !important;
+        padding: 0.25rem 0.7rem !important;
+        border-width: 3px !important;
+    }
+}
