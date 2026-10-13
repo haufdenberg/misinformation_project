@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!-- Fact or Fiction: How to Spot Misinformation (index.html)
+    Sections: header, unit hub, learning, quiz, results, certificate -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fact or Fiction | How to Spot Misinformation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Global header containing title/home button and progress bar -->
+    <header class="global-header">
+        <div class="header-content">
+            <div class="header-brand">
+                <span id="header-title" class="header-title">Fact or Fiction: How to Spot Misinformation</span>
+                <button id="nav-home-btn" class="btn-secondary hidden" type="button">🏠 Home</button>
+            </div>
+            <!-- Rebuilt by updateGlobalHeader() when the course is finished -->
+            <div class="progress-container">
+                <span>Overall Progress:</span>
+                <div class="progress-bar-bg">
+                    <div id="global-progress" class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <span id="progress-text">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <!-- Main unit hub -->
+        <section id="view-home" class="view">
+            <div class="hero-banner">
+                <h1>How to Spot Misinformation</h1>
+                <p class="subtitle">Have you ever seen a post online and thought it didn't sound real? Are you sure it was true?</p>
+                <p class="course-line">After 10 short lessons with a knowledge check after each one, you will learn how to identify and avoid spreading misinformation. Earn a passing score of 80% or better to move to the next unit. Click the first unit to begin!</p>
+            </div>
+
+            <!-- Current unit banner -->
+            <div class="current-unit-card">
+                <div class="current-unit-info">
+                    <span id="current-status-badge" class="badge badge-active">In Progress</span>
+                    <h2 id="current-unit-title">Unit 1: What Is Misinformation?</h2>
+                </div>
+                <button id="start-btn" class="btn-primary btn-large" type="button">Continue →</button>
+            </div>
+
+            <!-- Unit selection grid -->
+            <div class="units-section">
+                <p id="progress-line" class="progress-line"></p>
+                <div id="units-grid" class="units-grid"><!-- Filled in by renderHomeView() --></div>
+            </div>
+
+            <!-- Reset button to clear all progress -->
+            <div class="reset-area">
+                <button id="reset-btn" class="btn-secondary" type="button">↺ Reset All Progress</button>
+            </div>
+        </section>
+
+        <!-- Learning page (header, content, footer) -->
+        <section id="view-learning" class="view hidden">
+            <div class="view-header">
+                <span id="learning-unit-pill" class="unit-pill">Unit 1 of 10</span>
+                <h2 id="learning-title">What Is Misinformation?</h2>
+            </div>
+            <div id="learning-content" class="learning-content"><!-- Filled in by startUnit() --></div>
+            <div class="view-footer">
+                <button id="back-to-home-btn" class="btn-secondary" type="button">← Back to Home</button>
+                <button id="to-quiz-btn" class="btn-primary" type="button">Take the Unit Quiz →</button>
+            </div>
+        </section>
+
+        <!-- Quiz page (header, questions, footer) -->
+        <section id="view-quiz" class="view hidden">
+            <div class="view-header">
+                <span id="quiz-unit-pill" class="unit-pill">Quiz — Unit 1</span>
+                <h2 id="quiz-title">Knowledge Check</h2>
+            </div>
+            <div id="quiz-questions" class="quiz-list"><!-- Filled in by renderQuiz() --></div>
+            <div class="view-footer quiz-footer">
+                <span id="quiz-status" class="quiz-status" aria-live="polite"></span>
+                <div class="quiz-actions">
+                    <button id="quiz-submit-btn" class="btn-primary" type="button" disabled>Submit Answers</button>
+                    <button id="quiz-results-btn" class="btn-primary hidden" type="button">See Final Results →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results page (header, results, actions) -->
+        <section id="view-results" class="view hidden">
+            <h2>Knowledge Check Results</h2>
+            <div class="results-card">
+                <div id="result-status-icon" class="result-icon">🎉</div>
+                <h3 id="result-headline">Unit Completed!</h3>
+                <p id="result-message">You passed this segment with flying colors!</p>
+                <p class="score-display">Score: <span id="session-score">100</span>%</p>
+            </div>
+            <div class="results-actions">
+                <button id="repeat-learning-btn" class="btn-secondary" type="button">🔄 Repeat Lesson</button>
+                <button id="next-unit-btn" class="btn-primary" type="button">Advance to Next Unit →</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Course completion (certificate) -->
+    <section id="view-certificate" class="view hidden">
+        <div class="certificate-container" id="certificate-print-area">
+            <div class="certificate-header">
+                <span class="cert-badge">🏆 OFFICIAL CERTIFICATE</span>
+                <h1>Certificate of Achievement</h1>
+                <p class="cert-subtitle">This is awarded to</p>
+                <h2 class="recipient-name" id="cert-recipient">Expert Misinformation Analyst</h2>
+                <p class="cert-body">
+                    For successfully mastering all 10 units of the <strong>Fact or Fiction: How to Spot Misinformation</strong> course with a passing grade of 80% or higher.
+                </p>
+            </div>
+
+            <div class="cert-summary-section">
+                <h3>Unit Performance Summary</h3>
+                <div id="cert-summary-list" class="cert-summary-grid"></div>
+                <div class="cert-overall-score">
+                    Overall Average Score: <strong id="cert-overall-avg">0%</strong>
+                </div>
+            </div>
+
+            <div class="cert-footer">
+                <div class="cert-stamp">VERIFIED<br>SUCCESS</div>
+            </div>
+        </div>
+
+        <div class="cert-name-row">
+            <label for="cert-name-input">Name on certificate:</label>
+            <input id="cert-name-input" class="cert-name-input" type="text" maxlength="40" placeholder="Type your name here..." aria-label="Type your name here for the certificate">
+        </div>
+
+        <div class="results-actions">
+            <button id="print-cert-btn" class="btn-primary" type="button">🖨️ Print / Save Certificate</button>
+            <button id="cert-back-home-btn" class="btn-secondary" type="button">← Return to Home</button>
+        </div>
+    </section>
+    
+    <!-- content.js must load before script.js -->
+    <script src="content.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html>
